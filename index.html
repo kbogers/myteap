@@ -20,7 +20,84 @@
         </div>
     </nav>
     
-    <!-- ...existing code... -->
+    <div class="modal" id="signInModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Sign In</h2>
+                <button class="icon-button close-modal">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="auth-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="app">
+        <main>
+            <div id="welcome-box" class="welcome-container">
+                <h1>Welcome to myTomorrows Expanded Access</h1>
+                <p class="welcome-subtitle">Track and manage your Expanded Access Program with ease</p>
+                
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <span class="material-icons">timeline</span>
+                        <h3>Track Progress</h3>
+                        <p>Monitor program phases and milestones in real-time</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="material-icons">assignment_turned_in</span>
+                        <h3>Manage Tasks</h3>
+                        <p>Organize and complete tasks within each milestone</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="material-icons">groups</span>
+                        <h3>Team Collaboration</h3>
+                        <p>Work together with comments and updates</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="material-icons">insights</span>
+                        <h3>Program Insights</h3>
+                        <p>Get clear overview of program status and progress</p>
+                    </div>
+                </div>
+
+                <button class="cta-button" onclick="document.getElementById('signInModal').classList.add('show')">
+                    <span class="material-icons">login</span>
+                    Sign in to get started
+                </button>
+            </div>
+            <div id="programs-container"></div>
+        </main>
+    </div>
+
+    <div class="side-panel" id="requestPanel">
+        <div class="side-panel-header">
+            <h2>Request Details</h2>
+            <button class="icon-button icon-button--dark" onclick="closeRequestPanel()">
+                <span class="material-icons">close</span>
+            </button>
+        </div>
+        <div class="side-panel-tabs">
+            <button class="tab-button active" data-tab="phases">Phases</button>
+            <button class="tab-button" data-tab="details">Details</button>
+            <button class="tab-button" data-tab="comments">Comments</button>
+        </div>
+        <div class="side-panel-content">
+            <div class="tab-content active" id="phasesTab"></div>
+            <div class="tab-content" id="detailsTab"></div>
+            <div class="tab-content" id="commentsTab">
+                <div class="comments-section">
+                    <div id="commentsList"></div>
+                    <div class="comment-form">
+                        <textarea class="comment-input" placeholder="Write a comment..."></textarea>
+                        <button onclick="addComment()">Post</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2" type="text/javascript"></script>
