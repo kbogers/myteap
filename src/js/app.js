@@ -10,7 +10,16 @@ let currentUser = null;
 let currentProgram = null;
 let currentRequest = null;
 
-// Authentication functions
+// Add this helper function at the top of your file
+function getRedirectUrl() {
+    const isLocalhost = window.location.hostname === 'localhost' || 
+                       window.location.hostname === '127.0.0.1';
+    
+    return isLocalhost 
+        ? window.location.origin 
+        : 'https://kbogers.github.io/myteap/';
+}
+
 async function signIn(email) {
     try {
         const authContainer = document.getElementById('auth-container');
@@ -20,21 +29,10 @@ async function signIn(email) {
         const { error } = await supabase.auth.signInWithOtp({ 
             email,
             options: {
-                emailRedirectTo: window.location.origin
+                emailRedirectTo: getRedirectUrl()
             }
         });
-        
-        if (error) {
-            authContainer.innerHTML = originalContent;
-            throw error;
-        }
-        
-        authContainer.innerHTML = `
-            <div class="auth-message success">
-                Check your email for the login link!
-                <p class="auth-subtitle">You can close this window after logging in</p>
-            </div>
-        `;
+        // ...existing code...
     } catch (error) {
         console.error('Authentication error:', error);
         alert('Authentication error: ' + error.message);
@@ -46,11 +44,10 @@ async function signInWithGoogle() {
         const { error } = await supabase.auth.signInWithOAuth({
             provider: 'google',
             options: {
-                redirectTo: window.location.origin
+                redirectTo: getRedirectUrl()
             }
         });
-        
-        if (error) throw error;
+        // ...existing code...
     } catch (error) {
         console.error('Google authentication error:', error);
         alert('Authentication error: ' + error.message);
